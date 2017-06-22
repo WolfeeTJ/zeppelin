@@ -277,8 +277,11 @@ public class JDBCInterpreter extends Interpreter {
 
   private UsernamePassword getUsernamePassword(InterpreterContext interpreterContext,
                                                String replName) {
+    logger.info("replName: {}", replName);
     UserCredentials uc = interpreterContext.getAuthenticationInfo().getUserCredentials();
+    logger.info("uc: {}", uc);
     if (uc != null) {
+      logger.info("uc.getUsernamePassword(replName): {}", uc.getUsernamePassword(replName));
       return uc.getUsernamePassword(replName);
     }
     return null;
