@@ -300,8 +300,7 @@ public class JDBCInterpreter extends Interpreter {
     }
   }
 
-  private void setUserProperty(String propertyKey, InterpreterContext interpreterContext)
-    throws SQLException, IOException {
+  private void setUserProperty(String propertyKey, InterpreterContext interpreterContext) throws SQLException, IOException {
 
     String user = interpreterContext.getAuthenticationInfo().getUser();
     logger.info("user: {}", user);
