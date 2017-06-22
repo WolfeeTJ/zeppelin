@@ -27,6 +27,8 @@ import org.apache.zeppelin.interpreter.remote.RemoteEventClientWrapper;
 import org.apache.zeppelin.interpreter.remote.RemoteEventClient;
 import org.apache.zeppelin.interpreter.remote.RemoteInterpreterEventClient;
 import org.apache.zeppelin.resource.ResourcePool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Interpreter context
@@ -48,6 +50,7 @@ public class InterpreterContext {
     threadIC.remove();
   }
 
+  private static final Logger LOG = LoggerFactory.getLogger(AuthenticationInfo.class);
   private final String noteId;
   private final String replName;
   private final String paragraphTitle;
@@ -99,6 +102,7 @@ public class InterpreterContext {
     this.replName = replName;
     this.paragraphTitle = paragraphTitle;
     this.paragraphText = paragraphText;
+    LOG.info("authenticationInfo: {}", authenticationInfo);
     this.authenticationInfo = authenticationInfo;
     this.config = config;
     this.gui = gui;
@@ -150,6 +154,7 @@ public class InterpreterContext {
   }
 
   public AuthenticationInfo getAuthenticationInfo() {
+    LOG.info("authenticationInfo: {}", authenticationInfo);
     return authenticationInfo;
   }
 

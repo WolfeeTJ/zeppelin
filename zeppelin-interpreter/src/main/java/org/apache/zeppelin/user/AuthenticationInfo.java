@@ -31,11 +31,14 @@ public class AuthenticationInfo {
   String ticket;
   UserCredentials userCredentials;
   public static final AuthenticationInfo ANONYMOUS = new AuthenticationInfo("anonymous",
-      "anonymous");
+    "anonymous");
 
-  public AuthenticationInfo() {}
+  public AuthenticationInfo() {
+    LOG.info("user: {}", user);
+  }
 
   public AuthenticationInfo(String user) {
+    LOG.info("user: {}", user);
     this.user = user;
   }
 
@@ -45,6 +48,8 @@ public class AuthenticationInfo {
    * @param ticket
    */
   public AuthenticationInfo(String user, String ticket) {
+    LOG.info("user: {}", user);
+    LOG.info("ticket: {}", ticket);
     this.user = user;
     this.ticket = ticket;
   }
@@ -66,17 +71,19 @@ public class AuthenticationInfo {
   }
 
   public UserCredentials getUserCredentials() {
+    LOG.info("userCredentials: {}", userCredentials);
     return userCredentials;
   }
 
   public void setUserCredentials(UserCredentials userCredentials) {
+    LOG.info("userCredentials: {}", userCredentials);
     this.userCredentials = userCredentials;
   }
 
   public static boolean isAnonymous(AuthenticationInfo subject) {
     if (subject == null) {
       LOG.warn("Subject is null, assuming anonymous. "
-          + "Not recommended to use subject as null except in tests");
+        + "Not recommended to use subject as null except in tests");
       return true;
     }
     return subject.isAnonymous();
@@ -84,6 +91,6 @@ public class AuthenticationInfo {
 
   public boolean isAnonymous() {
     return ANONYMOUS.equals(this) || "anonymous".equalsIgnoreCase(this.getUser())
-        || StringUtils.isEmpty(this.getUser());
+      || StringUtils.isEmpty(this.getUser());
   }
 }

@@ -154,10 +154,10 @@ public class JDBCInterpreter extends Interpreter {
   @Override
   public void open() {
     for (String propertyKey : property.stringPropertyNames()) {
-      logger.debug("propertyKey: {}", propertyKey);
+      logger.info("propertyKey: {}", propertyKey);
       String[] keyValue = propertyKey.split("\\.", 2);
       if (2 == keyValue.length) {
-        logger.debug("key: {}, value: {}", keyValue[0], keyValue[1]);
+        logger.info("key: {}, value: {}", keyValue[0], keyValue[1]);
 
         Properties prefixProperties;
         if (basePropretiesMap.containsKey(keyValue[0])) {
@@ -175,7 +175,7 @@ public class JDBCInterpreter extends Interpreter {
       if (!COMMON_KEY.equals(key)) {
         Properties properties = basePropretiesMap.get(key);
         if (!properties.containsKey(DRIVER_KEY) || !properties.containsKey(URL_KEY)) {
-          logger.error("{} will be ignored. {}.{} and {}.{} is mandatory.",
+          logger.info("{} will be ignored. {}.{} and {}.{} is mandatory.",
             key, DRIVER_KEY, key, key, URL_KEY);
           removeKeySet.add(key);
         }
@@ -185,7 +185,7 @@ public class JDBCInterpreter extends Interpreter {
     for (String key : removeKeySet) {
       basePropretiesMap.remove(key);
     }
-    logger.debug("JDBC PropretiesMap: {}", basePropretiesMap);
+    logger.info("JDBC PropretiesMap: {}", basePropretiesMap);
 
     if (!isEmpty(property.getProperty("zeppelin.jdbc.auth.type"))) {
       JDBCSecurityImpl.createSecureConfiguration(property);
@@ -193,6 +193,9 @@ public class JDBCInterpreter extends Interpreter {
     for (String propertyKey : basePropretiesMap.keySet()) {
       propertyKeySqlCompleterMap.put(propertyKey, createSqlCompleter(null));
     }
+
+    logger.info("propertyKeySqlCompleterMap: {}", propertyKeySqlCompleterMap);
+
     setMaxLineResults();
   }
 
@@ -373,7 +376,7 @@ public class JDBCInterpreter extends Interpreter {
       return null;
     }
 
-    logger.debug("propertyKey: {}", propertyKey);
+    logger.info("propertyKey: {}", propertyKey);
     JDBCUserConfigurations jdbcUserConfigurations = getJDBCConfiguration(user);
     setUserProperty(propertyKey, interpreterContext);
 
@@ -692,7 +695,7 @@ public class JDBCInterpreter extends Interpreter {
 
   @Override
   public InterpreterResult interpret(String cmd, InterpreterContext contextInterpreter) {
-    logger.debug("Run SQL command '{}'", cmd);
+    logger.info("Run SQL command '{}'", cmd);
     String propertyKey = getPropertyKey(cmd);
 
     if (null != propertyKey && !propertyKey.equals(DEFAULT_KEY)) {
@@ -700,7 +703,7 @@ public class JDBCInterpreter extends Interpreter {
     }
 
     cmd = cmd.trim();
-    logger.debug("PropertyKey: {}, SQL command: '{}'", propertyKey, cmd);
+    logger.info("PropertyKey: {}, SQL command: '{}'", propertyKey, cmd);
     return executeSql(propertyKey, cmd, contextInterpreter);
   }
 
