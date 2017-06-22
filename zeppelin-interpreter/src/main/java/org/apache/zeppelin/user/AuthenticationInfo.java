@@ -93,4 +93,13 @@ public class AuthenticationInfo {
     return ANONYMOUS.equals(this) || "anonymous".equalsIgnoreCase(this.getUser())
       || StringUtils.isEmpty(this.getUser());
   }
+
+  @Override
+  public String toString() {
+    return "AuthenticationInfo{" +
+      "user='" + user + '\'' +
+      ", ticket='" + ticket + '\'' +
+      ", userCredentials=" + userCredentials +
+      '}';
+  }
 }

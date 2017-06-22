@@ -201,4 +201,25 @@ public class InterpreterContext {
   public InterpreterOutput out() {
     return out;
   }
+
+  @Override
+  public String toString() {
+    return "InterpreterContext{" +
+      "out=" + out +
+      ", noteId='" + noteId + '\'' +
+      ", replName='" + replName + '\'' +
+      ", paragraphTitle='" + paragraphTitle + '\'' +
+      ", paragraphId='" + paragraphId + '\'' +
+      ", paragraphText='" + paragraphText + '\'' +
+      ", authenticationInfo=" + authenticationInfo +
+      ", config=" + config +
+      ", gui=" + gui +
+      ", angularObjectRegistry=" + angularObjectRegistry +
+      ", resourcePool=" + resourcePool +
+      ", runners=" + runners +
+      ", className='" + className + '\'' +
+      ", client=" + client +
+      ", remoteWorksController=" + remoteWorksController +
+      '}';
+  }
 }
