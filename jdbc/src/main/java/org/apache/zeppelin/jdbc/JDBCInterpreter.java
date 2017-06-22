@@ -576,8 +576,8 @@ public class JDBCInterpreter extends Interpreter {
     ResultSet resultSet = null;
     String paragraphId = interpreterContext.getParagraphId();
     String user = interpreterContext.getAuthenticationInfo().getUser();
-
     InterpreterResult interpreterResult = new InterpreterResult(InterpreterResult.Code.SUCCESS);
+    logger.info("interpreterResult '{}'", interpreterContext);
 
     try {
       connection = getConnection(propertyKey, interpreterContext);
